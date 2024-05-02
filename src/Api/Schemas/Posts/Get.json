@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "post_title": {
+      "type": "string"
+    },
+    "post_excerpt": {
+      "type": "string",
+      "contentMediaType": "text/html"
+    }
+  },
+  "required": ["post_title"]
+}
