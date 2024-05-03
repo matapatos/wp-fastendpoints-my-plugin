@@ -38,5 +38,11 @@ jobs:
       - name: Setup WordPress
         run: composer run-script setup:wp:${{ matrix.wp_version }}
 
-      - name: Run test suite
-        run: composer run-script test
+      - name: Linter
+        run: composer run-script test:lint
+
+      - name: Unit tests
+        run: composer run-script test:unit
+
+      - name: Integration tests
+        run: composer run-script test:integration
