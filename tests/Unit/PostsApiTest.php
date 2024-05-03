@@ -12,17 +12,12 @@ declare(strict_types=1);
 
 namespace MyPlugin\Tests\Unit;
 
-use Brain\Monkey;
 use Mockery;
 use Wp\FastEndpoints\Endpoint;
 use Wp\FastEndpoints\Router;
 
-beforeEach(function () {
-    Monkey\setUp();
-});
-
 afterEach(function () {
-    Monkey\tearDown();
+    Mockery::close();
 });
 
 test('Check that we are returning a Router instance', function () {
