@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "beeedf4afd5f779217bc3eddec2e5511",
+    "content-hash": "5aee5c02c2e9d0e39e2dcd9c22ab9657",
     "packages": [
         {
             "name": "matapatos/wp-fastendpoints",

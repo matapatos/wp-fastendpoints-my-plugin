@@ -27,6 +27,7 @@
     }
   },
   "require-dev": {
+    "mockery/mockery": "^1.6",
     "dingo-d/wp-pest": "^1.6",
     "laravel/pint": "*"
   },
