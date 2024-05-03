@@ -17,7 +17,7 @@ jobs:
       fail-fast: true
       matrix:
         php: [ '8.1' ]
-        wp_version: [ '6.0']#, '6.1', '6.2', '6.3', '6.4' ]
+        wp_version: [ '6.0', '6.1', '6.2', '6.3', '6.4' ]
 
     name: WordPress ^${{ matrix.wp_version }} - PHP ${{ matrix.php }}
 
@@ -41,8 +41,8 @@ jobs:
       - name: Linter
         run: composer run-script test:lint
 
-      - name: Integration tests
-        run: composer run-script test:integration
-
       - name: Unit tests
         run: composer run-script test:unit
+
+      - name: Integration tests
+        run: composer run-script test:integration
