@@ -30,7 +30,7 @@ class ApiProvider implements ProviderContract
     public function register(): void
     {
         $this->appRouter = new Router('my-plugin', 'v1');
-        $this->appRouter->appendSchemaDir(\SCHEMAS_DIR);
+        $this->appRouter->appendSchemaDir(\SCHEMAS_DIR, 'https://www.my-plugin.com');
         foreach (glob(\ROUTERS_DIR.'/*.php') as $filename) {
             $router = require $filename;
             $this->appRouter->includeRouter($router);

@@ -51,11 +51,11 @@ test('REST API endpoints registered', function () {
         ->toHaveKeys([
             '/my-plugin/v1',
             '/my-plugin/v1/posts',
-            '/my-plugin/v1/posts/(?P<post_id>[\\d]+)',
+            '/my-plugin/v1/posts/(?P<ID>[\\d]+)',
         ])
         ->and($routes['/my-plugin/v1/posts'])
         ->toHaveCount(1)
-        ->and($routes['/my-plugin/v1/posts/(?P<post_id>[\\d]+)'])
+        ->and($routes['/my-plugin/v1/posts/(?P<ID>[\\d]+)'])
         ->toHaveCount(3);
 })->group('api', 'posts');
 

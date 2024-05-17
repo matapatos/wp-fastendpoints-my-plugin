@@ -39,7 +39,7 @@ test('Creating post endpoint has correct permissions and schema', function () {
         ->with('publish_posts');
     // Create router
     $router = Mockery::mock(Router::class)
-        ->makePartial();
+        ->shouldIgnoreMissing(Mockery::mock(Endpoint::class)->shouldIgnoreMissing(Mockery::self()));
     $router
         ->shouldReceive('post')
         ->once()
@@ -62,11 +62,11 @@ test('Retrieving post endpoint has correct permissions and schema', function () 
         ->with('read');
     // Create router
     $router = Mockery::mock(Router::class)
-        ->makePartial();
+        ->shouldIgnoreMissing(Mockery::mock(Endpoint::class)->shouldIgnoreMissing(Mockery::self()));
     $router
         ->shouldReceive('get')
         ->once()
-        ->with('(?P<post_id>[\d]+)', Mockery::type('callable'))
+        ->with('(?P<ID>[\d]+)', Mockery::type('callable'))
         ->andReturn($endpoint);
     require \ROUTERS_DIR.'/Posts.php';
 })->group('api', 'posts');
@@ -82,14 +82,14 @@ test('Updating post endpoint has correct permissions and schema', function () {
     $endpoint
         ->shouldReceive('hasCap')
         ->once()
-        ->with('edit_post', '{post_id}');
+        ->with('edit_post', '{ID}');
     // Create router
     $router = Mockery::mock(Router::class)
-        ->makePartial();
+        ->shouldIgnoreMissing(Mockery::mock(Endpoint::class)->shouldIgnoreMissing(Mockery::self()));
     $router
         ->shouldReceive('put')
         ->once()
-        ->with('(?P<post_id>[\d]+)', Mockery::type('callable'))
+        ->with('(?P<ID>[\d]+)', Mockery::type('callable'))
         ->andReturn($endpoint);
     require \ROUTERS_DIR.'/Posts.php';
 })->group('api', 'posts');
@@ -105,14 +105,14 @@ test('Deleting post endpoint has correct permissions and schema', function () {
     $endpoint
         ->shouldReceive('hasCap')
         ->once()
-        ->with('delete_post', '{post_id}');
+        ->with('delete_post', '{ID}');
     // Create router
     $router = Mockery::mock(Router::class)
-        ->makePartial();
+        ->shouldIgnoreMissing(Mockery::mock(Endpoint::class)->shouldIgnoreMissing(Mockery::self()));
     $router
         ->shouldReceive('delete')
         ->once()
-        ->with('(?P<post_id>[\d]+)', Mockery::type('callable'))
+        ->with('(?P<ID>[\d]+)', Mockery::type('callable'))
         ->andReturn($endpoint);
     require \ROUTERS_DIR.'/Posts.php';
 })->group('api', 'posts');

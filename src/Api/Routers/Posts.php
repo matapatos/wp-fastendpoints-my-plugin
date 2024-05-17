@@ -13,6 +13,8 @@ namespace MyPlugin\Api\Routers;
 
 use Wp\FastEndpoints\Helpers\WpError;
 use Wp\FastEndpoints\Router;
+use WP_Error;
+use WP_REST_Request;
 
 // Dependency injection to enable us to Mock router
 $router = $router ?? new Router('posts');
@@ -21,15 +23,14 @@ $router = $router ?? new Router('posts');
 $router->post('/', function (\WP_REST_Request $request): int|\WP_Error {
     $payload = $request->get_params();
 
-    return wp_insert_post($payload);
+    return wp_insert_post($payload, true);
 })
     ->schema('Posts/CreateOrUpdate')
     ->hasCap('publish_posts');
 
 // Fetches a single post
-$router->get('(?P<post_id>[\d]+)', function (\WP_REST_Request $request) {
-    $postId = $request->get_param('post_id');
-    $post = get_post($postId);
+$router->get('(?P<ID>[\d]+)', function ($ID) {
+    $post = get_post($ID);
 
     return $post ?: new WpError(404, 'Post not found');
 })
@@ -37,24 +38,22 @@ $router->get('(?P<post_id>[\d]+)', function (\WP_REST_Request $request) {
     ->hasCap('read');
 
 // Updates a post
-$router->put('(?P<post_id>[\d]+)', function (\WP_REST_Request $request): int|\WP_Error {
+$router->put('(?P<ID>[\d]+)', function (WP_REST_Request $request): int|WP_Error {
     $payload = $request->get_params();
-    $payload['ID'] = $request->get_param('post_id');
 
-    return wp_update_post($payload);
+    return wp_update_post($payload, true);
 })
     ->schema('Posts/CreateOrUpdate')
-    ->hasCap('edit_post', '{post_id}');
+    ->hasCap('edit_post', '{ID}');
 
 // Deletes a post
-$router->delete('(?P<post_id>[\d]+)', function (\WP_REST_Request $request) {
-    $postId = $request->get_param('post_id');
-    $post = wp_delete_post($postId);
+$router->delete('(?P<ID>[\d]+)', function ($ID) {
+    $post = wp_delete_post($ID);
 
     return $post ?: new WpError(500, 'Unable to delete post');
 })
     ->returns('Posts/Get')
-    ->hasCap('delete_post', '{post_id}');
+    ->hasCap('delete_post', '{ID}');
 
 // IMPORTANT: If no service provider is used make sure to set a version to the $router and call
 //            the following function here:
