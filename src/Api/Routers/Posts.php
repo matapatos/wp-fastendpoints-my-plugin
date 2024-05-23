@@ -15,12 +15,14 @@ use Wp\FastEndpoints\Helpers\WpError;
 use Wp\FastEndpoints\Router;
 use WP_Error;
 use WP_REST_Request;
+use WP_REST_Response;
 
 // Dependency injection to enable us to Mock router
 $router = $router ?? new Router('posts');
 
 // Creates a post
-$router->post('/', function (\WP_REST_Request $request): int|\WP_Error {
+$router->post('/', function (WP_REST_Request $request, WP_REST_Response $response): int|WP_Error {
+    $response->set_status(201);
     $payload = $request->get_params();
 
     return wp_insert_post($payload, true);
