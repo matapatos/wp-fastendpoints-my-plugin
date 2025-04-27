@@ -8,7 +8,7 @@
 
 **MyPlugin** is a WordPress sample plugin that demonstrates how to use FastEndpoints.
 
-- Follow up our guide at **[Quick Start FastEndpoints Wiki »](https://github.com/matapatos/wp-fastendpoints/wiki/Quick-start)**
+- Follow up our guide at **[Quick Start FastEndpoints Wiki »](https://github.com/attributes-php/wp-fastendpoints/wiki/Quick-start)**
 
 ## Features
 
